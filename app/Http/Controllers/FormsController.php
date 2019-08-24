@@ -9,7 +9,7 @@ class FormsController extends Controller
 {
     public function show($formId)
     {
-        $form = Form::whereNotNull('published_at')->findOrFail($formId);
+        $form = Form::published()->findOrFail($formId);
         return view('forms.show', ['form' => $form]);
     }
 }
