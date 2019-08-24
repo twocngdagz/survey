@@ -14,9 +14,7 @@ class ViewFormsListTest extends TestCase
     public function user_can_view_a_form()
     {
         //Arrange
-        $form = Form::create([
-            "name" => "Application Form",
-        ]);
+        $form = factory(Form::class)->states('published')->create();
 
         //Act
         $this->visit("/forms/" . $form->id);
@@ -28,10 +26,7 @@ class ViewFormsListTest extends TestCase
     /** @test */
     public function user_cannot_view_unpublished_form()
     {
-        $form = Form::create([
-            "name" => "Application Form",
-            "published_at" => null
-        ]);
+        $form = factory(Form::class)->states('unpublished')->create();
 
         $this->get("/forms/" . $form->id);
 

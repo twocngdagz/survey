@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -20,5 +22,23 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Form::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'Application Form'
+    ];
+});
+
+$factory->state(App\Form::class, 'published', function ($faker) {
+    return [
+        'published_at' => Carbon::parse('-1 week')
+    ];
+});
+
+$factory->state(App\Form::Class, 'unpublished', function ($faker) {
+    return [
+        'published_at' => null
     ];
 });
