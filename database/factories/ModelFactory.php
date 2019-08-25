@@ -42,3 +42,9 @@ $factory->state(App\Form::Class, 'unpublished', function ($faker) {
         'published_at' => null
     ];
 });
+
+$factory->define(App\Question::class, function ($faker) {
+    return [
+
+    ];
+});
