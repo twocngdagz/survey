@@ -1,6 +1,7 @@
 <?php
 
 use App\Form;
+use App\Question;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -24,5 +25,22 @@ class FormTest extends TestCase
         $this->assertTrue($publishedForms->contains($publishedForm1));
         $this->assertTrue($publishedForms->contains($publishedForm2));
         $this->assertFalse($publishedForms->contains($unPublishedForm1));
+    }
+
+    /** @test */
+    public function forms_will_render_into_html()
+    {
+        //Arrange
+        $form = factory(Form::class)->states('published')->create();
+
+        //Act
+        $html = $form->render();
+
+        //Assert
+        $this->assertSame(
+            '<form></form>',
+            $html
+        );
+
     }
 }
