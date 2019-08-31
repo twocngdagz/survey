@@ -1,6 +1,8 @@
 <?php
 
 use App\Form;
+use App\Html\Builder\SimpleForm;
+use App\Html\HtmlFactory;
 use App\Question;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -34,11 +36,11 @@ class FormTest extends TestCase
         $form = factory(Form::class)->states('published')->create();
 
         //Act
-        $html = $form->render();
+        $html = $form->render(new SimpleForm(new HtmlFactory));
 
         //Assert
         $this->assertSame(
-            '<form></form>',
+            '<form><input type="submit" value="Submit"></form>',
             $html
         );
 
