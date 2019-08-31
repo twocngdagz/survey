@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->string('name');
             $table->string('label');
             $table->string('type');
+            $table->text('options')->nullable();
             $table->unsignedInteger('form_id');
             $table->timestamps();
         });
