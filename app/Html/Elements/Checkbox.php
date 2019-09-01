@@ -4,7 +4,7 @@ namespace App\Html\Elements;
 
 use App\Html\AttributableArray;
 
-class Input extends AttributableArray
+class Checkbox extends AttributableArray
 {
     public function render()
     {

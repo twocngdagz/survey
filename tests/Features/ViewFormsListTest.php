@@ -135,7 +135,6 @@ class ViewFormsListTest extends TestCase
     /** @test */
     public function user_can_view_input_type_select_in_the_form()
     {
-        //Arrange
         $form = factory(Form::class)->states('published')->create();
 
         $form->questions()->saveMany([
@@ -151,10 +150,8 @@ class ViewFormsListTest extends TestCase
             ])
         ]);
 
-        //Act
         $this->visit("/forms/" . $form->id);
 
-        //Assert
         $this->seeElement("select", [
             "name" => "gender"
         ]);
@@ -178,5 +175,32 @@ class ViewFormsListTest extends TestCase
         $this->see("Male");
         $this->see("Female");
         $this->see("Other");
+    }
+
+    /** @test */
+    public function user_can_view_a_input_type_checkbox_in_the_form()
+    {
+        $form = factory(Form::class)->states('published')->create();
+
+        $form->questions()->saveMany([
+            factory(Question::class)->make([
+                'name' => 'remember',
+                'label' => 'Remember Me',
+                'type' => 'checkbox'
+            ])
+        ]);
+
+        $this->visit("/forms/" . $form->id);
+
+        $this->seeElement("input", [
+            "name" => "remember",
+            "type" => "checkbox"
+        ]);
+
+        $this->see("Remember Me");
+
+        $this->seeElement("input", [
+            "type" => "submit"
+        ]);
     }
 }

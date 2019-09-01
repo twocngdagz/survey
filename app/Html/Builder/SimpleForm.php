@@ -57,4 +57,12 @@ class SimpleForm implements FormBuilder
             "options" => $question->options
         ])->render();
     }
+
+    public function checkbox($question)
+    {
+        return $this->factory->make("checkbox", [
+            "name" => $question->name,
+            "type" => "checkbox"
+        ])->render() . " " . $question->label;
+    }
 }

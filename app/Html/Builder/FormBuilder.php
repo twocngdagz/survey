@@ -13,4 +13,6 @@ interface FormBuilder
     public function radio($question);
 
     public function select($question);
+
+    public function checkbox($question);
 }
